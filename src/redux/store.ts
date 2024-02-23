@@ -1,23 +1,24 @@
 import { PayloadAction, combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from 'redux-persist'
 import createWebStorage from "redux-persist/lib/storage/createWebStorage"
+import storage from "redux-persist/es/storage"
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 
 const createNoopStorage = () => {
     return {
         getItem(_key: string) {
-            return Promise.resolve(null)
+            return Promise.resolve("null")
         },
         setItem(_key: string, value: string) {
             return Promise.resolve(value);
         },
         removeItcem(_key: string) {
-            return Promise.resolve(null);
+            return Promise.resolve("null");
         }
     }
 }
 
-const storage = typeof window !== "undefined"? createWebStorage("local"): createNoopStorage();
+// const storage = typeof window !== "undefined"? createWebStorage("local"): createNoopStorage();
 
 import authReducer from "./slices/authSlice";
 import userReducer from "./slices/userSlice";
